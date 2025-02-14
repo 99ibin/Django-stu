@@ -226,3 +226,140 @@ body {
     border-color: #ffeeba;
     color: #856404;
 }
+
+/* 카카오 테마 스타일 */
+.kakao-theme {
+    --kakao-yellow: #FEE500;
+    --kakao-black: #000000;
+    --kakao-gray: #F6F6F6;
+    --kakao-text: #3C1E1E;
+    background-color: var(--kakao-gray);
+    min-height: 100vh;
+}
+
+/* 네비게이션 바 */
+.kakao-navbar {
+    background-color: white;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    padding: 0.5rem 1rem;
+    height: 60px;
+}
+
+/* 사이드바 */
+.kakao-sidebar {
+    width: 240px;
+    background-color: white;
+    min-height: calc(100vh - 60px);
+    padding: 20px 0;
+    box-shadow: 1px 0 2px rgba(0,0,0,0.1);
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-item {
+    padding: 12px 24px;
+    color: var(--kakao-text);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background-color 0.2s;
+}
+
+.menu-item:hover {
+    background-color: var(--kakao-gray);
+    color: var(--kakao-text);
+}
+
+.menu-item.active {
+    background-color: var(--kakao-gray);
+    font-weight: bold;
+}
+
+.menu-category {
+    padding: 12px 24px;
+    color: #999;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* 메인 콘텐츠 영역 */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background-color: var(--kakao-gray);
+}
+
+/* 사용자 프로필 */
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logout-link {
+    color: #999;
+    font-size: 0.9em;
+}
+
+/* 알림 메시지 */
+.messages {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.alert {
+    pointer-events: auto;
+    margin-bottom: 10px;
+    min-width: 300px;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    background-color: white;
+    border: none;
+    padding: 1rem;
+}
+
+/* 버튼 스타일 */
+.btn {
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background-color: var(--kakao-yellow);
+    color: var(--kakao-text);
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #DBC600;
+    color: var(--kakao-text);
+}
+
+/* 깃허브 링크 스타일 */
+.github-link {
+    font-size: 24px;
+    color: var(--kakao-text);
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+}
+
+.github-link:hover {
+    color: #666;
+}
+
+/* 네비게이션 바 아이템 정렬 */
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
