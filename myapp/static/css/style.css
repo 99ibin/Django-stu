@@ -1,0 +1,228 @@
+/* 기본 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+.login-button {
+    padding: 0;
+    background: none;
+    border: none;
+}
+
+.login-button img {
+    height: 40px;
+}
+
+/* 기존 스타일에 추가 */
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.api-button {
+    padding: 10px 20px;
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.api-button:hover {
+    background-color: #1557b0;
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+/* 지도와 목록 컨테이너 스타일 */
+.map-container, .list-container {
+    
+    height: 500px;  /* 동일한 높이 설정 */
+}
+
+/* 지도 스타일 */
+#map {
+    width: 100%;
+    height: 100%;  /* 컨테이너 높이에 맞춤 */
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* 목록 스타일 */
+.list-group {
+    height: 100%;
+    overflow-y: auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* 목록 아이템 스타일 */
+.list-group-item {
+    border-left: none;
+    border-right: none;
+    border-radius: 0 !important;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.list-group-item:first-child {
+    border-top: none;
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+    border-bottom-left-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+}
+
+.list-group-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* 검색창과 버튼 스타일 개선 */
+.input-group {
+    margin-right: 10px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.input-group .form-control {
+    border: none;
+    padding: 10px 20px;
+}
+
+.input-group .form-control:focus {
+    box-shadow: none;
+}
+
+/* 버튼 스타일 개선 */
+.btn {
+    min-width: 100px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* 버튼 색상 조정 */
+.btn-primary {
+    background-color: #4285f4;
+    border-radius: 0 20px 20px 0;
+    box-shadow: none;
+}
+
+.btn-success {
+    background-color: #34a853;
+}
+
+.btn-info {
+    background-color: #4285f4;
+}
+
+.btn-warning {
+    background-color: #fbbc05;
+    color: #000;
+}
+
+/* 입력창과 버튼 그룹 간격 */
+.gap-2 {
+    gap: 1rem !important;
+}
+
+/* 기본 메시지 스타일 */
+.default-message {
+    color: #6c757d;
+    background-color: #f8f9fa;
+    border: none !important;
+    cursor: default;
+}
+
+.default-message:hover {
+    background-color: #f8f9fa;
+}
+
+/* 검색 결과가 있을 때 기본 메시지 숨기기 */
+.list-group.has-results .default-message {
+    display: none;
+}
+
+/* 로드뷰 컨테이너 스타일 */
+#roadview {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    height: 200px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    z-index: 100;
+}
+
+/* 거리측정 도구 스타일 */
+.btn-secondary {
+    background-color: #757575;
+}
+
+.btn-secondary:hover {
+    background-color: #616161;
+}
+
+/* 로그인 카드 스타일 */
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+.alert {
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    transition: opacity 0.5s ease-in-out;
+    opacity: 1;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    min-width: 300px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+    color: #856404;
+}

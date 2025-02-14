@@ -1,0 +1,40 @@
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+<div class="text-center">
+    <h1>환영합니다!</h1>
+    {% if request.session.access_token %}
+        <div class="mt-4">
+            <h3>로그인 되었습니다.</h3>
+            <p>카카오톡 자동 로그인이 설정되었습니다.</p>
+            <button onclick="sendMessage()" class="btn btn-warning mt-3">
+                카카오톡 메시지 보내기
+            </button>
+        </div>
+    {% else %}
+        <div class="mt-4">
+            <h3>로그인이 필요합니다</h3>
+            <p>카카오톡으로 간편하게 로그인하세요.</p>
+        </div>
+    {% endif %}
+</div>
+
+<script>
+function sendMessage() {
+    fetch('{% url "myapp:send_message" %}')
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+                alert(data.message);
+            } else if (data.error) {
+                console.error('Error details:', data);
+                alert(data.error + '\n' + data.response_text);
+            }
+        })
+        .catch(error => {
+            console.error('Fetch error:', error);
+            alert('메시지 전송 중 오류가 발생했습니다.');
+        });
+}
+</script>
+{% endblock %} 
