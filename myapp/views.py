@@ -1,13 +1,15 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from django.conf import settings
 import requests
 from .authentication import KakaoAuth, kakao_login_required
-from .models import KakaoProfile
+from .models import KakaoProfile, UserProfile
 from django.contrib.auth.models import User
 import json
 from functools import wraps
 from django.contrib import messages
+from django.contrib.auth import login, authenticate
+from .forms import SignUpForm
 
 # Create your views here.
 
@@ -200,3 +202,132 @@ def map_view(request):
         'kakao_maps_api_key': settings.KAKAO_MAPS_API_KEY,
     }
     return render(request, 'myapp/map.html', context)
+
+def signup(request):
+    if request.method == 'POST':
+        try:
+            # 받은 데이터 출력
+            print("Received POST data:", request.POST)
+            print("Username:", request.POST.get('username'))
+            print("Email:", request.POST.get('email'))
+            print("Password length:", len(request.POST.get('password1', '')))
+            
+            # 기존 사용자 확인
+            if User.objects.filter(username=request.POST.get('username')).exists():
+                return JsonResponse({
+                    'success': False,
+                    'message': '이미 존재하는 사용자명입니다.',
+                    'errors': {'username': ['이미 존재하는 사용자명입니다.']}
+                })
+            
+            if User.objects.filter(email=request.POST.get('email')).exists():
+                return JsonResponse({
+                    'success': False,
+                    'message': '이미 등록된 이메일입니다.',
+                    'errors': {'email': ['이미 등록된 이메일입니다.']}
+                })
+            
+            # 비밀번호 유효성 검사
+            password = request.POST.get('password1')
+            if len(password) < 8:
+                return JsonResponse({
+                    'success': False,
+                    'message': '비밀번호는 8자 이상이어야 합니다.',
+                    'errors': {'password1': ['비밀번호는 8자 이상이어야 합니다.']}
+                })
+            
+            # 사용자 생성
+            user = User.objects.create_user(
+                username=request.POST.get('username'),
+                email=request.POST.get('email'),
+                password=password
+            )
+            
+            # UserProfile 생성
+            UserProfile.objects.create(
+                user=user,
+                phone_number=request.POST.get('phone_number', '')
+            )
+            
+            # 회원가입 후 자동 로그인
+            login(request, user)
+            
+            return JsonResponse({
+                'success': True,
+                'message': '회원가입이 완료되었습니다!'
+            })
+            
+        except Exception as e:
+            print(f"Error type: {type(e)}")
+            print(f"Error details: {str(e)}")
+            print(f"Error location:", e.__traceback__.tb_lineno)
+            return JsonResponse({
+                'success': False,
+                'message': '회원가입 처리 중 오류가 발생했습니다.',
+                'errors': {'__all__': [str(e)]}
+            })
+    
+    return JsonResponse({'success': False, 'message': '잘못된 요청입니다.'})
+
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        # authenticate() 함수가 데이터베이스에서 사용자 확인
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            login(request, user)  # 로그인 성공
+            return JsonResponse({
+                'success': True,
+                'message': '로그인 성공!'
+            })
+        else:  # 데이터베이스에서 일치하는 정보를 찾지 못함
+            return JsonResponse({
+                'success': False,
+                'message': '아이디 또는 비밀번호가 올바르지 않습니다.'
+            })
+    return JsonResponse({'success': False, 'message': '잘못된 요청입니다.'})
+
+# Create (회원가입)
+def create_user(request):
+    user = User.objects.create_user(
+        username='username',
+        email='email@example.com',
+        password='password'
+    )
+    # 프로필 생성
+    UserProfile.objects.create(
+        user=user,
+        phone_number='010-1234-5678'
+    )
+    return user
+
+# Read (사용자 정보 조회)
+def get_user_info(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    profile = UserProfile.objects.get(user=user)
+    return {
+        'username': user.username,
+        'email': user.email,
+        'phone': profile.phone_number
+    }
+
+# Update (사용자 정보 수정)
+def update_user(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    profile = UserProfile.objects.get(user=user)
+    
+    # 사용자 정보 업데이트
+    user.email = 'new_email@example.com'
+    user.save()
+    
+    # 프로필 정보 업데이트
+    profile.phone_number = '010-9876-5432'
+    profile.save()
+
+# Delete (회원 탈퇴)
+def delete_user(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    user.delete()  # 연결된 프로필도 자동으로 삭제됨 (CASCADE)
