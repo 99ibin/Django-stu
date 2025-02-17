@@ -126,7 +126,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    BASE_DIR / "myapp/static",
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -150,3 +150,6 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 # 카카오맵 API 키 추가
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'

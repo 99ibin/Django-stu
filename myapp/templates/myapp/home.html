@@ -1,40 +1,77 @@
 {% extends 'myapp/base.html' %}
 
 {% block content %}
-<div class="text-center">
-    <h1>환영합니다!</h1>
-    {% if request.session.access_token %}
-        <div class="mt-4">
-            <h3>로그인 되었습니다.</h3>
-            <p>카카오톡 자동 로그인이 설정되었습니다.</p>
-            <button onclick="sendMessage()" class="btn btn-warning mt-3">
-                카카오톡 메시지 보내기
-            </button>
-        </div>
-    {% else %}
-        <div class="mt-4">
-            <h3>로그인이 필요합니다</h3>
-            <p>카카오톡으로 간편하게 로그인하세요.</p>
-        </div>
-    {% endif %}
-</div>
+<main>  
+    <section id="about">  
+        <h1>회사소개</h1>  
+        <p>우리 회사의 비전과 목표를 설명합니다.</p>  
+    </section>  
 
-<script>
-function sendMessage() {
-    fetch('{% url "myapp:send_message" %}')
-        .then(response => response.json())
-        .then(data => {
-            if (data.message) {
-                alert(data.message);
-            } else if (data.error) {
-                console.error('Error details:', data);
-                alert(data.error + '\n' + data.response_text);
-            }
-        })
-        .catch(error => {
-            console.error('Fetch error:', error);
-            alert('메시지 전송 중 오류가 발생했습니다.');
-        });
-}
-</script>
+    <section id="values">  
+        <h2>핵심 가치</h2>  
+        <p>우리의 핵심 가치를 소개합니다.</p>  
+    </section>  
+
+    <section id="projects">  
+        <h2>Projects</h2>  
+        <div class="project">  
+            <h3>Villa Renovation</h3>  
+            <p>따뜻한, 평온함, 기능성 있는 주거 공간</p>  
+        </div>  
+        <div class="project">  
+            <h3>Commercial Design</h3>  
+            <p>시각적으로 즐거운 작업공간</p>  
+        </div>  
+        <div class="project">  
+            <h3>Project Curve</h3>  
+            <p>활기 넘치는 곡선을 활용한 브랜드 공간</p>  
+        </div>  
+        <div class="project">  
+            <h3>Project Straight</h3>  
+            <p>강렬한 직선 속에서의 편안한 휴식 공간</p>  
+        </div>  
+        <div class="project">  
+            <h3>Resort Design</h3>  
+            <p>명확성과 단순성을 강조한 공간 디자인</p>  
+        </div>  
+        <div class="project">  
+            <h3>Luxury Renovations</h3>  
+            <p>새로운 시대를 위한 공간</p>  
+        </div>  
+        <div class="project">  
+            <h3>Essential City</h3>  
+            <p>새로운 관점으로서 공간의 재발견</p>  
+        </div>  
+    </section>  
+
+    <section id="contact">  
+        <h2>Contact</h2>  
+        <p>저희에게 연락하세요.</p>  
+    </section>  
+
+    <section id="faq">  
+        <h2>자주 묻는 질문</h2>  
+        <div class="accordion">
+            <div class="accordion-item">
+                <h3>질문 1</h3>
+                <div class="answer">답변 내용...</div>
+            </div>
+            <!-- 더 많은 FAQ 항목 -->
+        </div>
+    </section>  
+
+    <section id="news">  
+        <h2>포트폴리오 소식</h2>  
+        <p>최근 소식 내용 요약</p>  
+    </section>  
+
+    <section id="button">  
+        <h2>Call to Action</h2>  
+        <button>Action Button</button>  
+    </section>  
+</main>  
+
+<footer>  
+    <p>Copyright © 2025 Your Company Name</p>  
+</footer>  
 {% endblock %} 

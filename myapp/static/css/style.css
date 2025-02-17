@@ -1,8 +1,9 @@
 /* 기본 스타일 */
 body {
     font-family: Arial, sans-serif;
+    line-height: 1.6;
     margin: 0;
-    padding: 20px;
+    padding: 0;
 }
 
 .login-button {
@@ -454,4 +455,60 @@ body {
 
 .social-login p::after {
     right: 0;
+}
+
+* {  
+    box-sizing: border-box;  
+}  
+
+header {  
+    background: #333;  
+    color: #fff;  
+    padding: 10px 0;  
+}  
+
+nav ul {  
+    list-style: none;  
+    padding: 0;  
+    text-align: center;  
+}  
+
+nav ul li {  
+    display: inline;  
+    margin: 0 15px;  
+}  
+
+nav ul li a {  
+    color: #fff;  
+    text-decoration: none;  
+}  
+
+nav ul li .button {  
+    background: #f39c12;  
+    padding: 5px 10px;  
+    border-radius: 5px;  
+}  
+
+main {  
+    padding: 20px;  
+}  
+
+section {  
+    margin: 20px 0;  
+}  
+
+.project {  
+    border: 1px solid #ddd;  
+    padding: 15px;  
+    margin: 10px 0;  
+}  
+
+footer {  
+    text-align: center;  
+    padding: 10px;  
+    background: #333;  
+    color: #fff;  
+    position: relative;  
+    bottom: 0;  
+    width: 100%;  
 }

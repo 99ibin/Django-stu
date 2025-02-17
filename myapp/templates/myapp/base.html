@@ -14,6 +14,15 @@
                 <a class="navbar-brand" href="{% url 'myapp:home' %}">
                     <img src="https://developers.kakao.com/docs/static/image/ko/pc/logo_developers.png" alt="Kakao API HOME" height="30">
                 </a>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#values">핵심가치</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Project</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#faq">자주 묻는 질문</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#news">포트폴리오 소식</a></li>
+                    <li class="nav-item"><a class="nav-link button" href="#button">Button</a></li>
+                </ul>
             </div>
             <div class="navbar-nav ms-auto">
                 {% if not request.session.access_token %}

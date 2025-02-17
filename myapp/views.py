@@ -3,7 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.conf import settings
 import requests
 from .authentication import KakaoAuth, kakao_login_required
-from .models import KakaoProfile, UserProfile
+from .models import KakaoProfile, UserProfile, NewsPost, Project
 from django.contrib.auth.models import User
 import json
 from functools import wraps
@@ -14,7 +14,11 @@ from .forms import SignUpForm
 # Create your views here.
 
 def home(request):
-    return render(request, 'myapp/home.html')
+    context = {
+        'news_posts': NewsPost.objects.all().order_by('-date')[:5],  # NewsPosts를 NewsPost로 수정
+        'projects': Project.objects.all(),  # 모든 프로젝트
+    }
+    return render(request, 'myapp/home.html', context)
 
 def kakao_login(request):
     kakao_auth = KakaoAuth()
